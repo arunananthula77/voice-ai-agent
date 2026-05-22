@@ -1,0 +1,234 @@
+<svg viewBox="0 0 900 680" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Mono', 'Courier New', monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#10b981"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="680" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" fill="#f1f5f9" font-size="17" font-weight="700" letter-spacing="-0.3">Real-Time Multilingual Voice AI Agent — Architecture</text>
+  <text x="450" y="54" text-anchor="middle" fill="#64748b" font-size="11">Clinical Appointment Booking · Python + TypeScript · Target: &lt;450ms</text>
+
+  <!-- ── CLIENT ── -->
+  <rect x="20" y="70" width="160" height="110" rx="10" fill="#1e293b" stroke="#6366f1" stroke-width="1.5"/>
+  <rect x="20" y="70" width="160" height="26" rx="10" fill="url(#purple)"/>
+  <rect x="20" y="84" width="160" height="12" rx="0" fill="url(#purple)"/>
+  <text x="100" y="87" text-anchor="middle" fill="white" font-size="11" font-weight="700">CLIENT (Browser)</text>
+  <text x="100" y="112" text-anchor="middle" fill="#94a3b8" font-size="10">MediaRecorder API</text>
+  <text x="100" y="127" text-anchor="middle" fill="#94a3b8" font-size="10">WebSocket (binary audio)</text>
+  <text x="100" y="142" text-anchor="middle" fill="#94a3b8" font-size="10">Audio Playback + UI</text>
+  <text x="100" y="157" text-anchor="middle" fill="#64748b" font-size="9">React + TypeScript</text>
+
+  <!-- Arrow: Client → WS Handler -->
+  <line x1="180" y1="125" x2="258" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,2"/>
+  <text x="218" y="119" text-anchor="middle" fill="#64748b" font-size="9">WS</text>
+
+  <!-- ── WEBSOCKET PIPELINE ── -->
+  <rect x="260" y="70" width="380" height="340" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="260" y="70" width="380" height="26" rx="10" fill="#1e293b"/>
+  <rect x="260" y="84" width="380" height="12" rx="0" fill="#1e293b"/>
+  <text x="450" y="87" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">FASTAPI BACKEND — VOICE PIPELINE</text>
+
+  <!-- STT Box -->
+  <rect x="280" y="108" width="100" height="52" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="330" y="127" text-anchor="middle" fill="#3b82f6" font-size="10" font-weight="700">STT</text>
+  <text x="330" y="141" text-anchor="middle" fill="#94a3b8" font-size="9">Whisper API</text>
+  <text x="330" y="153" text-anchor="middle" fill="#64748b" font-size="9">~120-180ms</text>
+
+  <!-- Arrow STT → Lang -->
+  <line x1="380" y1="134" x2="408" y2="134" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lang Detect Box -->
+  <rect x="410" y="108" width="100" height="52" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="460" y="127" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="700">Lang Detect</text>
+  <text x="460" y="141" text-anchor="middle" fill="#94a3b8" font-size="9">Unicode + langdetect</text>
+  <text x="460" y="153" text-anchor="middle" fill="#64748b" font-size="9">&lt;5ms</text>
+
+  <!-- Arrow Lang → Agent -->
+  <line x1="510" y1="134" x2="538" y2="134" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Agent Box -->
+  <rect x="540" y="100" width="82" height="68" rx="8" fill="#1e293b" stroke="#6366f1" stroke-width="2" filter="url(#glow)"/>
+  <text x="581" y="121" text-anchor="middle" fill="#6366f1" font-size="10" font-weight="700">AI AGENT</text>
+  <text x="581" y="135" text-anchor="middle" fill="#94a3b8" font-size="9">GPT-4o</text>
+  <text x="581" y="149" text-anchor="middle" fill="#94a3b8" font-size="9">Tool Calling</text>
+  <text x="581" y="162" text-anchor="middle" fill="#64748b" font-size="9">~200-300ms</text>
+
+  <!-- Tool Orchestration -->
+  <rect x="280" y="185" width="340" height="65" rx="8" fill="#0c1628" stroke="#334155" stroke-width="1"/>
+  <text x="290" y="201" fill="#64748b" font-size="9" font-weight="700">TOOL ORCHESTRATION</text>
+  <rect x="288" y="207" width="72" height="34" rx="5" fill="#1e293b" stroke="#334155"/>
+  <text x="324" y="220" text-anchor="middle" fill="#94a3b8" font-size="8">checkAvailability</text>
+  <text x="324" y="233" text-anchor="middle" fill="#64748b" font-size="7">GET /availability</text>
+  <rect x="368" y="207" width="62" height="34" rx="5" fill="#1e293b" stroke="#334155"/>
+  <text x="399" y="220" text-anchor="middle" fill="#94a3b8" font-size="8">bookAppt</text>
+  <text x="399" y="233" text-anchor="middle" fill="#64748b" font-size="7">POST /book</text>
+  <rect x="438" y="207" width="62" height="34" rx="5" fill="#1e293b" stroke="#334155"/>
+  <text x="469" y="220" text-anchor="middle" fill="#94a3b8" font-size="8">cancelAppt</text>
+  <text x="469" y="233" text-anchor="middle" fill="#64748b" font-size="7">DELETE /cancel</text>
+  <rect x="508" y="207" width="68" height="34" rx="5" fill="#1e293b" stroke="#334155"/>
+  <text x="542" y="220" text-anchor="middle" fill="#94a3b8" font-size="8">listDoctors</text>
+  <text x="542" y="233" text-anchor="middle" fill="#64748b" font-size="7">GET /doctors</text>
+
+  <!-- Arrow Agent → Tools -->
+  <line x1="581" y1="168" x2="581" y2="207" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+
+  <!-- TTS Box -->
+  <rect x="390" y="270" width="110" height="52" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="445" y="289" text-anchor="middle" fill="#10b981" font-size="10" font-weight="700">TTS</text>
+  <text x="445" y="303" text-anchor="middle" fill="#94a3b8" font-size="9">OpenAI tts-1 / gTTS</text>
+  <text x="445" y="315" text-anchor="middle" fill="#64748b" font-size="9">~80-120ms</text>
+
+  <!-- Arrow Tools → TTS -->
+  <line x1="450" y1="250" x2="450" y2="270" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Latency total -->
+  <rect x="280" y="340" width="340" height="28" rx="6" fill="#0c1628" stroke="#334155"/>
+  <text x="450" y="358" text-anchor="middle" fill="#f1f5f9" font-size="10">⚡ Total Pipeline: STT + Lang + Agent + TTS = <strong>&lt;450ms</strong></text>
+
+  <!-- ── MEMORY LAYER ── -->
+  <rect x="20" y="210" width="160" height="130" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="210" width="160" height="26" rx="10" fill="#1e293b"/>
+  <text x="100" y="227" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">MEMORY</text>
+
+  <rect x="30" y="243" width="140" height="42" rx="6" fill="#0f172a" stroke="#6366f1" stroke-width="1"/>
+  <text x="100" y="258" text-anchor="middle" fill="#6366f1" font-size="9" font-weight="700">Session Memory</text>
+  <text x="100" y="270" text-anchor="middle" fill="#64748b" font-size="8">Redis (TTL: 1hr)</text>
+  <text x="100" y="280" text-anchor="middle" fill="#64748b" font-size="8">History · Intent · State</text>
+
+  <rect x="30" y="292" width="140" height="42" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+  <text x="100" y="307" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="700">Persistent Memory</text>
+  <text x="100" y="319" text-anchor="middle" fill="#64748b" font-size="8">Redis (TTL: 30d)</text>
+  <text x="100" y="329" text-anchor="middle" fill="#64748b" font-size="8">Language · History · Prefs</text>
+
+  <!-- Arrow Memory ↔ Agent -->
+  <line x1="180" y1="270" x2="258" y2="250" stroke="#64748b" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+
+  <!-- ── DATABASE ── -->
+  <rect x="660" y="70" width="220" height="340" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="660" y="70" width="220" height="26" rx="10" fill="#1e293b"/>
+  <text x="770" y="87" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">DATABASE</text>
+  <text x="770" y="100" text-anchor="middle" fill="#64748b" font-size="9">PostgreSQL / SQLite</text>
+
+  <!-- Tables -->
+  <rect x="672" y="110" width="92" height="64" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="718" y="124" text-anchor="middle" fill="#3b82f6" font-size="9" font-weight="700">appointments</text>
+  <text x="718" y="137" text-anchor="middle" fill="#64748b" font-size="8">id, patient_id</text>
+  <text x="718" y="148" text-anchor="middle" fill="#64748b" font-size="8">doctor_id, date</text>
+  <text x="718" y="159" text-anchor="middle" fill="#64748b" font-size="8">time_slot, status</text>
+  <text x="718" y="170" text-anchor="middle" fill="#64748b" font-size="8">language</text>
+
+  <rect x="776" y="110" width="92" height="64" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="822" y="124" text-anchor="middle" fill="#10b981" font-size="9" font-weight="700">patients</text>
+  <text x="822" y="137" text-anchor="middle" fill="#64748b" font-size="8">id, name, phone</text>
+  <text x="822" y="148" text-anchor="middle" fill="#64748b" font-size="8">preferred_language</text>
+
+  <rect x="672" y="185" width="92" height="64" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="718" y="199" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="700">doctors</text>
+  <text x="718" y="212" text-anchor="middle" fill="#64748b" font-size="8">id, name</text>
+  <text x="718" y="223" text-anchor="middle" fill="#64748b" font-size="8">specialty</text>
+  <text x="718" y="234" text-anchor="middle" fill="#64748b" font-size="8">available</text>
+
+  <rect x="776" y="185" width="92" height="64" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="822" y="199" text-anchor="middle" fill="#8b5cf6" font-size="9" font-weight="700">doctor_schedules</text>
+  <text x="822" y="212" text-anchor="middle" fill="#64748b" font-size="8">doctor_id, date</text>
+  <text x="822" y="223" text-anchor="middle" fill="#64748b" font-size="8">available_slots[]</text>
+
+  <rect x="672" y="260" width="196" height="50" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="770" y="276" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="700">campaigns</text>
+  <text x="770" y="289" text-anchor="middle" fill="#64748b" font-size="8">id, name, type, patient_ids[]</text>
+  <text x="770" y="300" text-anchor="middle" fill="#64748b" font-size="8">scheduled_at, status</text>
+
+  <!-- Arrow Pipeline → DB -->
+  <line x1="640" y1="250" x2="658" y2="250" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── SCHEDULER ── -->
+  <rect x="20" y="360" width="620" height="90" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="360" width="620" height="26" rx="10" fill="#1e293b"/>
+  <text x="330" y="377" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">OUTBOUND CAMPAIGN SCHEDULER</text>
+
+  <rect x="30" y="393" width="140" height="48" rx="6" fill="#0f172a" stroke="#ef4444" stroke-width="1"/>
+  <text x="100" y="412" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="700">Campaign Runner</text>
+  <text x="100" y="425" text-anchor="middle" fill="#64748b" font-size="8">BackgroundTasks</text>
+  <text x="100" y="436" text-anchor="middle" fill="#64748b" font-size="8">Async Fire-and-Forget</text>
+
+  <rect x="182" y="393" width="130" height="48" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="247" y="412" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="700">Opening Messages</text>
+  <text x="247" y="425" text-anchor="middle" fill="#64748b" font-size="8">EN / HI / TA</text>
+  <text x="247" y="436" text-anchor="middle" fill="#64748b" font-size="8">Reminder/Followup/Vacc</text>
+
+  <rect x="324" y="393" width="120" height="48" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="384" y="412" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="700">Twilio Integration</text>
+  <text x="384" y="425" text-anchor="middle" fill="#64748b" font-size="8">Real outbound calls</text>
+  <text x="384" y="436" text-anchor="middle" fill="#64748b" font-size="8">(optional, prod)</text>
+
+  <rect x="456" y="393" width="170" height="48" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="541" y="412" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="700">Same Voice Pipeline</text>
+  <text x="541" y="425" text-anchor="middle" fill="#64748b" font-size="8">Inbound = Outbound agent</text>
+  <text x="541" y="436" text-anchor="middle" fill="#64748b" font-size="8">language adapts per patient</text>
+
+  <!-- ── MULTILINGUAL BADGE ── -->
+  <rect x="20" y="470" width="860" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="50" y="492" fill="#64748b" font-size="10" font-weight="700">MULTILINGUAL DETECTION PIPELINE</text>
+  <rect x="40" y="500" width="180" height="22" rx="4" fill="#1e293b" stroke="#3b82f6"/>
+  <text x="130" y="515" text-anchor="middle" fill="#3b82f6" font-size="9">① Unicode Script (U+0900-097F = Hindi, U+0B80-0BFF = Tamil)</text>
+  <rect x="232" y="500" width="140" height="22" rx="4" fill="#1e293b" stroke="#f59e0b"/>
+  <text x="302" y="515" text-anchor="middle" fill="#f59e0b" font-size="9">② Transliteration Keywords</text>
+  <rect x="384" y="500" width="130" height="22" rx="4" fill="#1e293b" stroke="#10b981"/>
+  <text x="449" y="515" text-anchor="middle" fill="#10b981" font-size="9">③ langdetect Library</text>
+  <rect x="526" y="500" width="120" height="22" rx="4" fill="#1e293b" stroke="#334155"/>
+  <text x="586" y="515" text-anchor="middle" fill="#94a3b8" font-size="9">④ Default: English</text>
+  <text x="670" y="515" fill="#64748b" font-size="9">Persisted to patient context →</text>
+  <text x="790" y="515" fill="#6366f1" font-size="9">future sessions use pref</text>
+
+  <!-- ── LATENCY STRIP ── -->
+  <rect x="20" y="548" width="860" height="50" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="50" y="568" fill="#64748b" font-size="10" font-weight="700">MEASURED LATENCY  (logged every turn)</text>
+  <rect x="40" y="576" width="80" height="16" rx="3" fill="#1e2a3a" stroke="#3b82f6"/>
+  <text x="80" y="588" text-anchor="middle" fill="#3b82f6" font-size="9">STT: ~120-180ms</text>
+  <line x1="122" y1="584" x2="136" y2="584" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="138" y="576" width="70" height="16" rx="3" fill="#1e2a3a" stroke="#f59e0b"/>
+  <text x="173" y="588" text-anchor="middle" fill="#f59e0b" font-size="9">Lang: &lt;5ms</text>
+  <line x1="210" y1="584" x2="224" y2="584" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="226" y="576" width="90" height="16" rx="3" fill="#1e2a3a" stroke="#6366f1"/>
+  <text x="271" y="588" text-anchor="middle" fill="#6366f1" font-size="9">Agent: ~200-300ms</text>
+  <line x1="318" y1="584" x2="332" y2="584" stroke="#64748b" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="334" y="576" width="80" height="16" rx="3" fill="#1e2a3a" stroke="#10b981"/>
+  <text x="374" y="588" text-anchor="middle" fill="#10b981" font-size="9">TTS: ~80-120ms</text>
+  <line x1="416" y1="584" x2="438" y2="584" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="440" y="572" width="140" height="22" rx="5" fill="#1e2a3a" stroke="#22c55e" stroke-width="2"/>
+  <text x="510" y="587" text-anchor="middle" fill="#22c55e" font-size="11" font-weight="700">TOTAL: &lt;450ms ✓</text>
+
+  <!-- Footer -->
+  <text x="450" y="645" text-anchor="middle" fill="#334155" font-size="9">2Care.ai · Real-Time Multilingual Voice AI Agent · Clinical Appointment Booking</text>
+</svg>
